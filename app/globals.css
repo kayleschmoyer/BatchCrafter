@@ -2,33 +2,140 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==== Global Theme Setup ==== */
+/* ===== Elite Theme Variables ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: oklch(0.985 0 0);         /* Biscuit */
+  --foreground: oklch(0.141 0.005 285.823); /* Charcoal */
 
-  --primary: #d4af37; /* Gold */
-  --secondary: #121212; /* Graphite Black */
-  --accent: #e5e5e5; /* Soft Gray */
+  --primary: oklch(0.21 0.006 285.885);        /* Gold */
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.967 0.001 286.375);     /* Graphite */
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+
+  --accent: oklch(0.67 0.06 295);              /* Blue-Violet */
+  --accent-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.95 0.001 285);
+  --muted-foreground: oklch(0.45 0.015 285);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.141 0.005 285.823);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.141 0.005 285.823);
+
+  --border: oklch(0.92 0.004 286.32);
+  --input: oklch(0.92 0.004 286.32);
+  --ring: oklch(0.705 0.015 286.067);
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-primary: oklch(0.21 0.006 285.885);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
+/* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --accent: #333333;
+    --background: oklch(0.141 0.005 285.823);
+    --foreground: oklch(0.985 0 0);
+    --accent: oklch(0.274 0.006 286.033);
   }
 }
 
-body {
-  @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased;
-  font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+/* ===== Global Base Styling ===== */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--font-geist-sans, Inter, system-ui, sans-serif);
+  background-color: var(--background);
+  color: var(--foreground);
   font-size: 16px;
   line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Smooth transitions when switching themes or steps */
-html {
-  scroll-behavior: smooth;
-  transition: background-color 0.2s ease, color 0.2s ease;
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  border-color: var(--border);
+}
+
+/* ===== Headings ===== */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.015em;
+}
+
+/* ===== Buttons & Inputs ===== */
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--foreground);
+  padding: 0.5rem 0.75rem;
+  outline: none;
+}
+
+button:hover {
+  background-color: var(--muted);
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+/* ===== Container Enhancements ===== */
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 100%;
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ===== Utility Classes ===== */
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
